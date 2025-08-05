@@ -1,0 +1,239 @@
+<?php
+include("conn.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Movie-Flix</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/global.css" rel="stylesheet">
+	<link href="css/list.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+<style>
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+	body{
+		background: black;
+	}
+</style>
+</head>
+
+<body>
+
+	<div class="main_o main">
+		<div class="main_o1 bg_back">
+			 <section id="header">
+<nav class="navbar navbar-expand-md navbar-light px_4" id="navbar_sticky">
+  <div class="container-fluid">
+    <a class="navbar-brand  p-0 fw-bold text-white" href="index.php"><i class="fa fa-modx col_oran"></i>Movie<span style="color: #D96C2C;">Flix<span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	   <ul class="navbar-nav mb-0 ms-auto">
+	    
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="index.php">Home</a>
+        </li>
+		 
+		<li class="nav-item">
+          <a class="nav-link " href="about.php">About Us</a>
+        </li>
+		<li class="nav-item">
+		  <a class="nav-link active" href="movie.php">Movies</a>
+		</li>
+		
+		<li class="nav-item">
+		  <a class="nav-link" href="blog.php">Blogs</a>
+		</li>
+		
+		<li class="nav-item">
+		  <a class="nav-link" href="contact_add.php">Contact Us</a>
+		</li>
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+		    <li><a class="dropdown-item" href="faq.php"><i class="fa fa-chevron-right font_12 me-1"></i> Faqs</a></li>
+			<li><a class="dropdown-item border-0" href="ticket.php"><i class="fa fa-chevron-right font_12 me-1"></i> Ticket</a></li>
+          </ul>
+        </li>
+			
+      </ul>
+      <ul class="navbar-nav mb-0 ms-auto">
+	       <li class="nav-item">
+          <a class="nav-link fs-5 drop_icon" data-bs-target="#exampleModal2" data-bs-toggle="modal" href="#"><i class="fa fa-search"></i></a>
+        </li>
+		   <li class="nav-item dropdown header-profile mt-1">
+                                <a class="nav-link " href="#" role="button" data-toggle="dropdown">
+									<i class="fa fa-user"></i>       
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right bg-black text-light">
+                                    <a class="nav-link" href="./login.php" class="dropdown-item">
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</section>
+			<section id="center" class="centre_o  pt-5 pb-5">
+				<div class="container-xl">
+					<div class="row centre_o1 text-center">
+						<div class="col-md-12">
+							<h1 class="text-white font_60">Movies</h1>
+							<h5 class="mb-0 mt-3 fw-normal col_oran"><a class="text-light" href="index.php">Home</a> <span class="mx-2 text-muted">/</span> Movies</h5>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="border_dashed">
+
+	</div>
+
+	<section class="tiles py-5">
+  <div class="container">
+    <div class="row">
+      <?php
+      $sql = "SELECT * FROM movies";
+      $result = $conn->query($sql);
+
+      if ($result && $result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+              ?>
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 bg-dark text-light">
+                  <img  src="../images/movies/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                  <div class="card-body">
+                    <h5 class="card-title font_18">	</h5>
+                    <p class="card-text text-muted"><?php echo htmlspecialchars($row['category']); ?></p>
+					<li  class="d-inline-block ms-2">
+					    <!-- FIXED: Added movie ID to the URL -->
+					    <a class="button_1" href="movie_details.php?id=<?php echo $row['id']; ?>">
+					        <i class="fa fa-check-circle me-1 font_14"></i> Movie Details
+					    </a>
+					</li>
+				  </div>
+				</div>
+			  </div>
+              <?php
+          }
+      } else {
+          echo '<div class="col-12 text-center"><p class="text-white">No movies found.</p></div>';
+      }
+      ?>
+    </div>
+  </div>
+</section>
+
+	<section id="trend" class="p_3">
+		<div class="pages mt-4 row text-center">
+			<div class="col-md-12">
+				<ul class="mb-0">
+					<li><a href="detail.html"><i class="fa fa-chevron-left"></i></a></li>
+					<li><a class="act" href="detail.html">1</a></li>
+					<li><a href="">2</a></li>
+					<li><a href="">3</a></li>
+					<li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+<section id="footer" class="p_3 bg-black">
+ <div class="container-xl">
+    <div class="footer_1 row pb-4">
+	  <div class="col-md-3">
+	   <div class="footer_1l">
+	     <h4 class="mb-0"><a class="fw-bold text-white" href="index.html"><i class="fa fa-modx col_oran"></i> Movie<span style="color: #D96C2C;">Flix<span></a></h4>
+	   </div>
+	  </div>
+	  <div class="col-md-9">
+	   <div class="footer_1r text-end">
+	     <ul class="mb-0">
+		   <li class="d-inline-block"><a class="text-white-50 a_tag" href="contact_add.php">Help</a></li>
+		     <li class="d-inline-block text-white-50">/</li>
+		   <li class="d-inline-block me-2"><a class="text-white-50 a_tag" href="#"> Privacy Policy</a></li>
+		   <li class="d-inline-block"><a class="social_icon" href="#"> <i class="fa fa-twitter"></i></a></li>
+		    <li class="d-inline-block"><a class="social_icon" href="#"> <i class="fa fa-facebook"></i></a></li>
+			 <li class="d-inline-block"><a class="social_icon" href="#"> <i class="fa fa-instagram"></i></a></li>
+			  <li class="d-inline-block"><a class="social_icon" href="#"> <i class="fa fa-pinterest"></i></a></li>
+		 </ul>
+	   </div>
+	  </div>
+	</div>
+	<div class="footer_2 row mt-4">
+	  <div class="col-md-3">
+	   <div class="footer_2i">
+         <p class="text-white fw-bold fs-5">Buy movie tickets easily with Aovis system nationwide</p>
+		 <h6 class="mb-0 mt-4"><a class="button" href="ticket.php">Get Your Ticket</a></h6>
+	   </div>
+	  </div>
+	  <div class="col-md-3">
+	   <div class="footer_2i">
+         <h5 class="col_oran mb-4">Movies</h5>
+		 <div class="row footer_1ism">
+		 <h6 class="fw-normal col-md-12 col-6"><a class="text-white-50 a_tag" href="movie.php"> Action</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="movie.php"> Adventure</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="movie.php"> Animation</a></h6>
+	  <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="movie.php"> Thriller</a></h6>
+	   <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="movie.php"> Crime</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6 mb-0"><a class="text-white-50 a_tag" href="movie.php"> Comedy</a></h6>
+	    </div>
+	   </div>
+	  </div>
+	  <div class="col-md-3">
+	   <div class="footer_2i">
+         <h5 class="col_oran mb-4">Links</h5>
+		 <div class="row footer_1ism">
+		 <h6 class="fw-normal col-md-12 col-6"><a class="text-white-50 a_tag" href="about.php"> About Us</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="faq.php"> Faqs</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="blog.php"> Blog</a></h6>
+	  <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="blog.php"> Latest Events</a></h6>
+	   <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="ticket.php"> Ticket</a></h6>
+	 <h6 class="fw-normal mt-2 col-md-12 col-6 mb-0"><a class="text-white-50 a_tag" href="contact_add.php"> Contact Us</a></h6>
+	    </div>
+	   </div>
+	  </div>
+	  <div class="col-md-3">
+	   <div class="footer_2i">
+         <h5 class="col_oran mb-4">Newsletter</h5>
+		 <p class="text-white-50">Subscribe to Leitmotif newsletter this very day.</p>
+		 <div class="input-group bg-white">
+				<input type="text" class="form-control bg-transparent rounded-0 border-0" placeholder="Enter Your Email">
+				<span class="input-group-btn">
+					<button class="btn btn-primary bg-transparent rounded-0 border-0 col_oran p-3" type="button">
+						<i class="fa fa-location-arrow"></i></button>
+				</span>
+		</div>
+		<div class="form-check mt-3 text-white-50">
+<input class="form-check-input" type="checkbox" value="">
+<label class="form-check-label" for="flexCheckDefault">
+I agree to all terms and policies of the company
+</label>
+</div>
+	   </div>
+	  </div>
+	</div>
+ </div>
+</section>
+	<script src="js/common.js"></script>
+
+</body>
+</html>
