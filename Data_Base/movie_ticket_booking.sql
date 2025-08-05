@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2025 at 01:29 AM
+-- Generation Time: Aug 05, 2025 at 03:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `movie_ticket_booking`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog`
+--
+
+CREATE TABLE `blog` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `discription` varchar(500) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blog`
+--
+
+INSERT INTO `blog` (`id`, `title`, `discription`, `image`, `category`, `date`) VALUES
+(1, 'USAMA', 'USAMA MSDADJSADASID AS', 'award.jpg', 'Action-Crime', '2025-02-02 00:00:00'),
+(2, 'usama', 'usamammmeon memmon ', 'Contagion-of-Fear.jpg', 'Action-Adventure', '2023-02-22 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -250,6 +273,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `phone_number`, `cr
 --
 
 --
+-- Indexes for table `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
@@ -300,6 +329,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `bookings`
