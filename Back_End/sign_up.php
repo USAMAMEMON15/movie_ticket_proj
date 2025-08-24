@@ -2,68 +2,21 @@
 include("conn.php");
 
 if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
+    $name     = $_POST['name'];
+    $email    = $_POST['email'];
     $password = $_POST['password'];
+    $phone    = $_POST['phone'];
 
-    //  Get user by email
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = $conn->query($sql);
+    // PASSWORD WIL BE SUMBIT IN HASH FORM FOR SECURITY SO NO ONE CAN SEE THE PASSWORD
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+    // CHECK IF USER ALREADY EXISIT
+    $check = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $check->bind_param("s", $email);
+    $check->execute();
+    $checkResult = $check->get_result();
 
-        //  Verify password with hash
-        if (password_verify($password, $user['password_hash'])) {
-            echo <<<EOT
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    window.onload = function() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: 'success',
-            title: '<span style="color: #D96C2C;">User login Successfully!</span><br>Redirecting to login page...'
-        });
-        setTimeout(() => {
-            window.location.href = 'index.php';
-        }, 3300);
-    }
-</script>
-EOT;
-        } else {
-     echo <<<EOT
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    window.onload = function() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: 'error',
-            title: '<span style="color: #D96C2C;">Incorroct password1</span>'
-        });
-    }
-</script>
-EOT;
-        }
-    } else {
+   if ($checkResult->num_rows > 0) {
     echo <<<EOT
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -81,14 +34,72 @@ EOT;
         });
         Toast.fire({
             icon: 'error',
-            title: '<span style="color: #D96C2C;">Email Not Found</span>'
+            title: '<span style="color: #D96C2C;">Email already registered!</span>'
+        });
+    }
+</script>
+EOT;
+} else {
+    // Insert new user securely using prepared statement
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password_hash, phone_number, created_at) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->bind_param("ssss", $name, $email, $password_hash, $phone);
+
+    if ($stmt->execute()) {
+      echo <<<EOT
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    window.onload = function() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: 'success',
+            title: '<span style="color: #D96C2C;">User Registered Successfully!</span><br>Redirecting to login page...'
+        });
+        setTimeout(() => {
+            window.location.href = 'login.php';
+        }, 3300);
+    }
+</script>
+EOT;
+
+    } else {
+   echo <<<EOT
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    window.onload = function() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: 'error',
+            title: '<span style="color: #D96C2C;">Registration Failed!</span>'
         });
     }
 </script>
 EOT;
     }
 }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +108,7 @@ EOT;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movie-Flix-Login</title>
+    <title>Movie-Flix-Sign Up</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/global.css" rel="stylesheet">
@@ -187,31 +198,32 @@ h5{
                     <div class="row no-gutters">
                         <div class="col-xl-12">
                             <div class="auth-form">
-                                <h4 class="text-center  mb-4"><span>Login</span> Your Account</h4>
-                                <Form action="" method="post" enctype="multipart/form-data">
-                                    <div class="form-group ">
-                                        <label class="pb-2"><strong>Email & Number</strong></label>
-                                        <input type="email" name="email" class="form-control rounded-3"
-                                            placeholder="Enter your Email Or Number">
-                                    </div>
-                                    <div class="form-group pt-4">
-                                        <label class="pb-2"><strong>Password</strong></label>
-                                        <input type="password" name="password" class="form-control rounded-3"
-                                            placeholder="Enter Your Password">
-                                    </div>
-                                    <div class="form-row d-flex justify-content-between mt-3 mb-2">
-                                        <div class="form-group">
-                                            <span><a href="">Forgot Password?</a></span>
+                                <h4 class="text-center  mb-4"><span>Sign Up</span> your account</h4>
+                               <form id="Form" action="" method="post" enctype="multipart/form-data">
+                                        <div class="form- d-flex">
+                                            <div class="div p-1"><label><strong>Username</strong></label>
+                                            <input type="text" name="name" class="form-control rounded-3" Required  placeholder="Enter Your username">
+                                            </div>
+                                            <div class="div p-1"> <label><strong>Email</strong></label>
+                                            <input type="email"  name="email" class="form-control rounded-3" Required  placeholder="Enter your Email">
+                                            </div>
                                         </div>
+                                        
+                                        <div class="form-group pt-3">
+                                            <label><strong>Password</strong></label>
+                                            <input type="password"  name="password" class="form-control rounded-3"  Required  placeholder="Enter Your Password">
+                                        </div>
+                                          <div class="form-group pt-3">
+                                            <label><strong>Number</strong></label>
+                                            <input type="int"  name="phone" class="form-control rounded-3"Required  placeholder="Enter Your Number" >
+                                        </div>
+                                        <div class="display-6">
+                                           <a> <button type="submit" name="submit"   href="./login.php" class="btn  my-2 mx-0 ">Sign up</button> </a>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Already have an account? <a class="ms-3 fw-bold" href="login.php ">Log in</a></p>
                                     </div>
-                                    <div class="">
-                                        <button type="submit" name="submit" class="btn  my-2 mx-0">
-                                            Login</button>
-                                    </div>
-                                </form>
-                                <div class="new-account mt-3">
-                                    <p>Don't have an account? span<a class="ms-3 fw-bold" href="sign_up.php">Sign up</a></p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -232,7 +244,7 @@ h5{
                     </div>
                     <div class="carousel-inner  ">
                         <div class="carousel-item active rounded-3 ">
-                            <img src="./img./s1.png" class="d-block w-100  " height="400px" alt="...">
+                            <img src="./img./s1.png" class="d-block w-100 " height="400px" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <!-- <h5>First slide label</h5>
                                 <p>Some representative placeholder content for the first slide.</p> -->
@@ -318,8 +330,7 @@ h5{
                                 </h6>
                                 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="#">
                                         Adventure</a></h6>
-                                <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="#">
-                                        Animation</a></h6>
+                              
                                
                                 
                             </div>
@@ -336,8 +347,7 @@ h5{
                                 <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="#">
                                         Latest
                                         Events</a></h6>
-                                <h6 class="fw-normal mt-2 col-md-12 col-6"><a class="text-white-50 a_tag" href="#">
-                                        Privacy</a></h6>
+                              
                                
                             </div>
                         </div>

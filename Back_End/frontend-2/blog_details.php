@@ -16,8 +16,18 @@ include("conn.php");
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="style.css">
 
     <style>
+		@keyframes scale-up-ver-buttom-normal {0% { transform: scaleY(0.4); transform-origin: 100% 0%; } 100% { transform: scaleY(1); transform-origin: 100% 0%;} }
+
+.scale-up-ver-buttom-normal { 
+    animation: scale-up-ver-buttom-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
+}
+    .card-img-buttom {
+        height: 250px;
+        object-fit: cover;
+    }
        .main_o{
 		background:url("img/back-ground.png")
 	}
@@ -93,8 +103,8 @@ include("conn.php");
  <div class="container-xl">
   <div class="row centre_o1 text-center">
     <div class="col-md-12">
-      <h1 class="text-white font_60">Blog Details</h1>
-	  <h5 class="mb-0 mt-3 fw-normal col_oran"><a class="text-light" href="blog.php">Blogs</a> <span class="mx-2 text-muted">/</span> Blog Details</h5>
+      <h1 class="text-white font_60 focus-in-contract-normal">Blog Details</h1>
+	  <h5 class="mb-0 mt-3 fw-normal col_oran focus-in-contract-normal"><a class="focus-in-contract-normal text-light" href="blog.php">Blogs</a> <span class="mx-2 text-muted">/</span> Blog Details</h5>
    </div>
   </div>
  </div>
@@ -142,7 +152,7 @@ include("conn.php");
   }
   ?>
 
-<section id="blog" class="p_3">
+<section id="blog" class="p_3 scale-up-ver-buttom-normal">
  <div class="container-xl">
     <div class="blog_1 row">
 	  <div class="col-md-8">
@@ -200,63 +210,6 @@ include("conn.php");
 		</div>
 	   </div>
 		   </div>	 
-		   <div class="blog_1dt3 mt-3">
-		     <h3 class="mb-3">Related Blog</h3>
-			 <div class="row blog_h1">
-               <div class="col-md-6">
-   <div class="blog_h1m">
-     <div class="blog_h1m1 position-relative">
-	   <div class="blog_h1m1">
-	     <div class="grid clearfix">
-		  <figure class="effect-jazz mb-0">
-			<a href=""><img src="img/Latest3.jpg" class="w-100" alt="img25"></a>
-		  </figure>
-	  </div>
-	   </div>
-	   <div class="blog_h1m2 position-absolute w-100">
-	     <h2 class="mb-0 bg_oran d-inline-block p-3 text-white text-center">
-18<br>
-<span class="fs-6">JUNE</span></h2>
-	   </div>
-	 </div>
-	 <div class="blog_h1m2 shadow_box bg-dark p-4">
-	   <h4><a href="">Upcoming New Season 5 Just Flow in !</a></h4>
-	   <p class="mt-3">Nostrud tem exrcitation duis laboris nisi ut aliquip sed duis aute cupidata con proident sunt culpa.</p>
-	   <h5 class="fs-6"><a href="">Read More</a></h5>
-	   <hr>
-	   <h6 class="mt-4 mb-0 font_14"><i class="fa fa-user col_oran me-1"></i>  <a href="#">Admin</a>
- <span class="pull-right"><i class="fa fa-comment-o col_oran me-1"></i> <a href="#">0 Comments</a></span></h6>
-	 </div>
-   </div>
-  </div>	
-               <div class="col-md-6">
-   <div class="blog_h1m">
-     <div class="blog_h1m1 position-relative">
-	   <div class="blog_h1m1">
-	     <div class="grid clearfix">
-		  <figure class="effect-jazz mb-0">
-			<a href="#"><img src="img/eoght.jpg" class="w-100" alt="img25"></a>
-		  </figure>
-	  </div>
-	   </div>
-	   <div class="blog_h1m2 position-absolute w-100">
-	     <h2 class="mb-0 bg_oran d-inline-block p-3 text-white text-center">
-19<br>
-<span class="fs-6">JUNE</span></h2>
-	   </div>
-	 </div>
-	 <div class="blog_h1m2 shadow_box bg-dark text-light p-4">
-	   <h4><a href="">The Foreign Oscar Nominations 2023</a></h4>
-	   <p class="mt-3">Nostrud tem exrcitation duis laboris nisi ut aliquip sed duis aute cupidata con proident sunt culpa.</p>
-	    <h5 class="fs-6"><a href="">Read More</a></h5>
-	   <hr>
-	   <h6 class="mt-4 mb-0 font_14"><i class="fa fa-user col_oran me-1"></i>  <a href="#">Admin</a>
- <span class="pull-right"><i class="fa fa-comment-o col_oran me-1"></i> <a href="#">0 Comments</a></span></h6>
-	 </div>
-   </div>
-  </div>
-             </div>
-		   </div>
 		   <div class="blog_1dt4 mt-4">
 		     <h3 class="mb-3">2 Comments</h3>
 			 <div class="blog_1dt4i row">
@@ -290,41 +243,7 @@ include("conn.php");
 		 </div>
 		</div>
 		   </div>
-		   <div class="blog_1dt5 mt-4">
-		     <h3>Leave A Reply</h3>
-			 <p>Your email address will not be published. Required fields are marked *</p>
-			 <div class="form-check">
-<input class="form-check-input" type="checkbox" value="">
-<label class="form-check-label" for="flexCheckDefault">
-Save my name, email, and website in this browser for the next time I comment.
-</label>
-</div>
-             <div class="blog_1dt5i row mt-3">
-			   <div class="col-md-4">
-			      <div class="blog_1dt5il">
-				    <input class="form-control" placeholder="Name" type="text">
-				  </div>
-			   </div>
-			   <div class="col-md-4">
-			      <div class="blog_1dt5il">
-				    <input class="form-control" placeholder="Email" type="text">
-				  </div>
-			   </div>
-			   <div class="col-md-4">
-			      <div class="blog_1dt5il">
-				    <input class="form-control" placeholder="Website" type="text">
-				  </div>
-			   </div>
-			 </div>
-			 <div class="blog_1dt5i row mt-3">
-			   <div class="col-md-12">
-			      <div class="blog_1dt5il">
-				    <textarea placeholder="Comment" class="form-control form_text"></textarea>
-					<h6 class="mb-0 mt-4 center_sm"><a class="button_2" href="#">Post Comment</a></h6>
-				  </div>
-			   </div>
-			 </div>
-		   </div>
+
 		 </div>
 	  </div>
 	  <div class="col-md-4">
@@ -339,7 +258,7 @@ Save my name, email, and website in this browser for the next time I comment.
 		</div>
 		</div>
 		<div class="blog_1r2 mt-4 bg-dark p-4">
-		    <h4 class="mb-4">Latest Posts</h4>
+		    <h4 class="mb-4 ">Latest Posts</h4>
 			<div class="row blog_1r2i">
 		     <div class="col-md-4 col-4 pe-0">
 			  <div class="blog_1r2il">

@@ -17,14 +17,36 @@ include("conn.php");
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 
 
   <style>
+     @keyframes scale-up-hor-left-normal {0% { transform: scaleX(0.4); transform-origin: 0% 0%; } 100% { transform: scaleX(1); transform-origin: 0% 0%;} }
+
+.scale-up-hor-left-normal { 
+    animation: scale-up-hor-left-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
+}
+ @keyframes scale-up-ver-top-normal {0% { transform: scaleY(0.4); transform-origin: 100% 0%; } 100% { transform: scaleY(1); transform-origin: 100% 0%;} }
+
+.scale-up-ver-top-normal:hover { 
+    animation: scale-up-ver-top-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
+}
     .card-img-top {
       height: 250px;
       object-fit: cover;
     }
 
+@keyframes scale-up-ver-buttom-normal {0% { transform: scaleY(0.4); transform-origin: 100% 0%; } 100% { transform: scaleY(1); transform-origin: 100% 0%;} }
+
+.scale-up-ver-buttom-normal { 
+    animation: scale-up-ver-buttom-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
+}
+    .card-img-buttom {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    
     body {
       background: black;
     }
@@ -97,8 +119,8 @@ include("conn.php");
         <div class="container-xl">
           <div class="row centre_o1 text-center">
             <div class="col-md-12">
-              <h1 class="text-white font_50">Movies Deatils</h1>
-              <h5 class="mb-0 mt-3 fw-normal col_oran"><a class="text-light" href="index.php">Home</a> <span class="mx-2 text-muted">/</span> Movies</h5>
+              <h1 class="text-white font_50 focus-in-contract-normal">Movies Deatils</h1>
+              <h5 class="mb-0 mt-3 fw-normal col_oran focus-in-contract-normal"><a class="text-light focus-in-contract-normal" href="index.php">Home</a> <span class="mx-2 text-muted">/</span> Movies</h5>
             </div>
           </div>
         </div>
@@ -142,16 +164,16 @@ include("conn.php");
   }
   ?>
 
-  <h1 class=" text-center mb-5 mt-5 text-light"><?= htmlspecialchars($movie['title']) ?></h1>
+  <h1 class=" text-center mb-5 mt-5 text-light scale-up-ver-buttom-normal"><?= htmlspecialchars($movie['title']) ?></h1>
 
   <div id="main">
     <div class="inner">
-      <div class="container">
+      <div class="container scale-up-ver-buttom-normal">
         <div class="row align-items-center ">
-          <div class="col-lg-4 col-md-12 mb-4 pt-5">
+          <div class="col-lg-4 col-md-12 mb-4 pt-1 ">
           
                    <!-- Play Icon -->
-                   <img id="imgd"  height="320px" width="370px" src="../images/movies/<?= htmlspecialchars($movie['image']) ?>"
+                   <img id="imgd" class=""  height="320px" width="300px" src="../images/movies/<?= htmlspecialchars($movie['image']) ?>"
                    alt="<?= htmlspecialchars($movie['title']) ?> poster"
                    class=" rounded shadow">
                   </div>
@@ -192,7 +214,7 @@ include("conn.php");
       </div>
     </div>
   </div>
-<section class="tiles py-5">
+<section class="tiles py-5 ">
   <div class="container">
     <div class="row">
       <?php
@@ -204,7 +226,7 @@ include("conn.php");
               ?>
               
               <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card h-100 bg-dark text-light">
+                <div class="card h-100 bg-dark text-light ">
                   <img  src="../images/movies/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['title']); ?>">
                   <div class="card-body">
                     <h5 class="card-title font_18"><?php echo htmlspecialchars($row['title']); ?></h5>
@@ -243,3 +265,4 @@ include("conn.php");
   <?php
   include("footer.php");
   ?>
+

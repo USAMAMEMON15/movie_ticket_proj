@@ -17,7 +17,17 @@ include("conn.php");
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="style.css">
 	<style>
+		@keyframes scale-up-ver-buttom-normal {0% { transform: scaleY(0.4); transform-origin: 100% 0%; } 100% { transform: scaleY(1); transform-origin: 100% 0%;} }
+
+.scale-up-ver-buttom-normal { 
+    animation: scale-up-ver-buttom-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
+}
+    .card-img-buttom {
+        height: 250px;
+        object-fit: cover;
+    }
 		.main_o {
 			background: url("img/back-ground.png")
 		}
@@ -95,8 +105,8 @@ include("conn.php");
 				<div class="container-xl">
 					<div class="row centre_o1 text-center">
 						<div class="col-md-12">
-							<h1 class="text-white font_60">Blogs</h1>
-							<h5 class="mb-0 mt-3 fw-normal col_oran"><a class="text-light" href="index.php">Home</a> <span class="mx-2 text-muted">/</span> Blogs</h5>
+							<h1 class="text-white font_60 focus-in-contract-normal">Blogs</h1>
+							<h5 class="mb-0 mt-3 fw-normal col_oran focus-in-contract-normal"><a class="focus-in-contract-normal text-light" href="index.php">Home</a> <span class="mx-2 text-muted">/</span> Blogs</h5>
 						</div>
 					</div>
 				</div>
@@ -106,7 +116,7 @@ include("conn.php");
 	<div class="border_dashed">
 	</div>
 
-<section id="blog" class="p_3">
+<section id="blog" class="p_3 scale-up-ver-buttom-normal">
     <div class="container-xl">
         <div class="blog_1 row">
             <!-- Blog Posts Section -->

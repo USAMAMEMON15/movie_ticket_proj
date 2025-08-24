@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
     $Image = $_FILES['Image']['name'];
     $Category = $_POST['Category'];
     $Date = $_POST['Date'];
-    $sql = "insert into blogs (title,discription,image,category,date) values('$Title' , '$Discription', '$Image', '$Category', '$Date')";
+    $sql = "insert into blog (title,discription,image,category,date) values('$Title' , '$Discription', '$Image', '$Category', '$Date')";
     $result = $conn->query($sql);
 
     if (isset($_FILES)) {
@@ -189,7 +189,6 @@ if (isset($_POST['submit'])) {
         </script>";
     }
 }
-include("footer.php");
 ?>
 
 <section id="footer" class="p_3 bg-black">

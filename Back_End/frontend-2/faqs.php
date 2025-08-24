@@ -15,83 +15,15 @@
 	<script src="js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="style.css">
 <style>
-  @keyframes scale-up-ver-buttom-normal {0% { transform: scaleY(0.4); transform-origin: 100% 0%; } 100% { transform: scaleY(1); transform-origin: 100% 0%;} }
-
-.scale-up-ver-buttom-normal { 
-    animation: scale-up-ver-buttom-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both; 
-}
-    .card-img-buttom {
-        height: 250px;
-        object-fit: cover;
-    }
   body{
-    background: black;
+    background: url("img/back-ground.png");
     color: white;
   }
 </style>
 </head>
 <body>
 
-<div class="main_o main">
- <div class="main_o1 bg_back">
-   <section id="header">
-<nav class="navbar navbar-expand-md navbar-light px_4" id="navbar_sticky">
-  <div class="container-fluid">
-    <a class="navbar-brand  p-0 fw-bold text-white" href="index.php"><i class="fa fa-modx col_oran"></i> Movie<span style="color: #D96C2C;">Flix</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	   <ul class="navbar-nav mb-0 ms-auto">
-	    
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="index.php">Home</a>
-        </li>
-		 
-		<li class="nav-item">
-          <a class="nav-link " href="about.php">About Us</a>
-        </li>
-		<li class="nav-item">
-		  <a class="nav-link" href="movie.php">Movies</a>
-		</li>
-		
-		<li class="nav-item">
-		  <a class="nav-link" href="blog.php">Blogs</a>
-		</li>
-		
-		<li class="nav-item">
-		  <a class="nav-link" href="contact_add.php">Contact Us</a>
-		</li>
-		<li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Pages
-          </a>
-          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-		    <li><a class="dropdown-item" href="faq.php"><i class="fa fa-chevron-right font_12 me-1"></i> Faqs</a></li>
-			<li><a class="dropdown-item border-0" href="ticket.php"><i class="fa fa-chevron-right font_12 me-1"></i> Ticket</a></li>
-          </ul>
-        </li>
-			
-      </ul>
-      <ul class="navbar-nav mb-0 ms-auto">
-	       <li class="nav-item">
-          <a class="nav-link fs-5 drop_icon" data-bs-target="#exampleModal2" data-bs-toggle="modal" href="#"><i class="fa fa-search"></i></a>
-        </li>
-		   <li class="nav-item dropdown header-profile mt-1">
-                                <a class="nav-link " href="#" role="button" data-toggle="dropdown">
-									<i class="fa fa-user"></i>       
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right bg-black text-light">
-                                    <a class="nav-link" href="./login.php" class="dropdown-item">
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-</section>
+
    <section id="center" class="centre_o  pt-5 pb-5">
  <div class="container-xl">
   <div class="row centre_o1 text-center">
@@ -109,7 +41,7 @@
 
 </div>
 
-<section id="faq" class="p_3 bg_light scale-up-ver-buttom-normal">
+<section id="faq" class="p_3 bg_light">
    <div class="container-xl">
 	  <div class="faq_1 row">
 	   <div class="col-md-3">

@@ -17,6 +17,8 @@ include("conn.php");
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	
 <style>
   body{
     background: black;
